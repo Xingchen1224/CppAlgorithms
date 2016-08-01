@@ -8,5 +8,7 @@ int main() {
     int size1 = sizeof(pData1)/sizeof(int);
 
     CSort testSort1(pData1, size1);
+    testSort1.mBubbleSort();
+
     return 0;
 }
