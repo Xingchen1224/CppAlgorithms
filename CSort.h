@@ -46,9 +46,10 @@ public:
 
         if(m_data!= nullptr){
             for (int i = 0; i < m_length; ++i) {
+                cout<<"[";
                 cout.width(numberWidth);
                 cout.setf(ios::left);
-                cout<< m_data[i] << " ";
+                cout<< m_data[i] <<"]";
             }
 
             cout<< endl;

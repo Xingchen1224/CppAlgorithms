@@ -1,6 +1,6 @@
 #include <iostream>
 #include "CSort.h"
-#include "CSequence.h"
+#include "CTask.h"
 
 using namespace std;
 
@@ -14,8 +14,8 @@ int main() {
 //    testCase1();
 //    testCase2();
 //    testCase3();
-    testCase4();
-//    testCase5();
+//    testCase4();
+    testCase5();
     return 0;
 }
 
@@ -49,5 +49,15 @@ void testCase4(){
 }
 
 void testCase5(){
+    CTask task1("Learn machine learning", 2.0);
+    CTask task2("Review C++", 3.0);
+    CTask task3("Learn image processing", 1.3);
+    CTask task4("Review algorithms", 1.1);
+    CTask task5("Review math", 2.1);
+    CTask task6("Reading inside c++ model", 0.3);
 
+    CTask tasks[]{task1,task2,task3,task4,task5,task6};
+    int size = sizeof(tasks)/sizeof(CTask);
+    CSort<CTask> testSort(tasks,size);
+    testSort.mBubbleSort();
 }
