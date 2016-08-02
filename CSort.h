@@ -62,7 +62,7 @@ public:
     void mBubbleSort(){
         int round = 0;
         for (int i = 0; i < m_length-1; ++i) {
-            for (int j = i; j < m_length-1; ++j) {
+            for (int j = 0; j < m_length-1-i; ++j) {
                 round++;
                 if(m_data[j]> m_data[j+1]) {
                     this->mSwap(m_data[j],m_data[j+1]);
