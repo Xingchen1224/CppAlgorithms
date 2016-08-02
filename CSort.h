@@ -82,8 +82,8 @@ public:
 
 
 private:
-    T* m_data;
-    int  m_length;
+    T* m_data{nullptr};
+    int  m_length{0};
 
     void mSwap(T& a, T& b){
         T temp = a;
