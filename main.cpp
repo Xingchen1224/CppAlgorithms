@@ -10,8 +10,9 @@ void testCase3(); //Bubble Sort <double>
 void testCase4(); //Bubble Sort <char>
 void testCase5(); //Bubble Sort <CTask>
 void testCase6(); //Select Sort <int>
-void testCase7(); //Select Sort <float>
+void testCase7(); //Select Sort <float> & Bubble Sort <float>
 void testCase8(); //Select Sort <CTask>
+void testCase9(); //Insert Sort <int>
 
 int main() {
 //    testCase1();
@@ -21,7 +22,8 @@ int main() {
 //    testCase5();
 //    testCase6();
 //    testCase7();
-    testCase8();
+//    testCase8();
+    testCase9();
     return 0;
 }
 
@@ -80,7 +82,11 @@ void testCase7(){
     int size = sizeof(pData)/sizeof(float);
     CSort<float> testSort(pData, size);
     testSort.mSelectSort();
-    testSort.mBubbleSort();
+
+    float pData2[] = {3.0, 44.1, 38.2, 5.3, 47.4, 15.5, 36.6, 26.7, 27.8, 2.9, 46.0, 4.1, 19.2, 50.3, 48.4};
+    int size2 = sizeof(pData2)/sizeof(float);
+    CSort<float> testSort2(pData2, size2);
+    testSort2.mBubbleSort();
 }
 
 void testCase8(){
@@ -95,4 +101,26 @@ void testCase8(){
     int size = sizeof(tasks)/sizeof(CTask);
     CSort<CTask> testSort(tasks,size);
     testSort.mSelectSort();
+}
+
+void testCase9(){
+    int pData[] = {56,78,37,11,53,13,756,43,9,67,4,32,12,14,75,99,15,33,38,74,35,246,74,373,743,212,42,56,41,98};
+    int size = sizeof(pData)/sizeof(int);
+    CSort<int>* testSort = new CSort<int>(pData, size);
+    testSort->mInsertSort();
+    delete testSort;
+
+    cout << "---------------------------------------------------------" <<endl <<endl;
+    int pData2[] = {56,78,37,11,53,13,756,43,9,67,4,32,12,14,75,99,15,33,38,74,35,246,74,373,743,212,42,56,41,98};
+    int size2 = sizeof(pData2)/sizeof(int);
+    CSort<int>* testSort2 = new CSort<int>(pData2, size2);
+    testSort2->mSelectSort();
+    delete testSort2;
+
+    cout << "---------------------------------------------------------" <<endl <<endl;
+    int pData3[] = {56,78,37,11,53,13,756,43,9,67,4,32,12,14,75,99,15,33,38,74,35,246,74,373,743,212,42,56,41,98};
+    int size3 = sizeof(pData3)/sizeof(int);
+    CSort<int>* testSort3 = new CSort<int>(pData3, size3);
+    testSort3->mBubbleSort();
+    delete testSort3;
 }

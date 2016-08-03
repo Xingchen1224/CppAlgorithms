@@ -64,11 +64,12 @@ public:
         int round = 0;
         for (int i = 0; i < m_length-1; ++i) {
             for (int j = 0; j < m_length-1-i; ++j) {
-                round++;
+
                 if(m_data[j]> m_data[j+1]) {
+                    round++;
                     this->mSwap(m_data[j],m_data[j+1]);
+                    this->mPrintSequence("Bubble Sort",round);
                 }
-                this->mPrintSequence("Bubble Sort",round);
             }
         }
     }
@@ -78,18 +79,35 @@ public:
         for (int i = 0; i < m_length; ++i) {
             int minIndex = i;
             for (int j = i; j < m_length; ++j) {
-                round++;
+
                 if(m_data[j]< m_data[minIndex]){
                     minIndex = j;
                 }
-                this->mPrintSequence("Select Sort",round);
             }
             if(minIndex != i){
+                round++;
                 mSwap(m_data[i],m_data[minIndex]);
+                this->mPrintSequence("Select Sort",round);
             }
         }
     }
-//    void mInsertSort();
+
+    void mInsertSort(){
+        int round = 0;
+        T current = m_data[0];
+        for (int i = 0; i < m_length-1; ++i) {
+            current = m_data[i+1];
+            int step = 0;
+            while(current < m_data[i-step] && (i-step)>=0)
+            {
+                m_data[i-step+1] = m_data[i-step];
+                step++;
+                round++;
+                this->mPrintSequence("Insert Sort",round);
+            }
+            m_data[i-step+1] = current;
+        }
+    }
 //    void mMergeSort();
 //    void mQuickSort();
 //    void mRQuickSort();
