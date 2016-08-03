@@ -4,18 +4,24 @@
 
 using namespace std;
 
-void testCase1();
-void testCase2();
-void testCase3();
-void testCase4();
-void testCase5();
+void testCase1(); //Bubble Sort <int>
+void testCase2(); //Bubble Sort <float>
+void testCase3(); //Bubble Sort <double>
+void testCase4(); //Bubble Sort <char>
+void testCase5(); //Bubble Sort <CTask>
+void testCase6(); //Select Sort <int>
+void testCase7(); //Select Sort <float>
+void testCase8(); //Select Sort <CTask>
 
 int main() {
 //    testCase1();
 //    testCase2();
 //    testCase3();
 //    testCase4();
-    testCase5();
+//    testCase5();
+//    testCase6();
+//    testCase7();
+    testCase8();
     return 0;
 }
 
@@ -60,4 +66,33 @@ void testCase5(){
     int size = sizeof(tasks)/sizeof(CTask);
     CSort<CTask> testSort(tasks,size);
     testSort.mBubbleSort();
+}
+
+void testCase6(){
+    int pData[] = {3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48};
+    int size = sizeof(pData)/sizeof(int);
+    CSort<int> testSort(pData, size);
+    testSort.mSelectSort();
+}
+
+void testCase7(){
+    float pData[] = {3.0, 44.1, 38.2, 5.3, 47.4, 15.5, 36.6, 26.7, 27.8, 2.9, 46.0, 4.1, 19.2, 50.3, 48.4};
+    int size = sizeof(pData)/sizeof(float);
+    CSort<float> testSort(pData, size);
+    testSort.mSelectSort();
+    testSort.mBubbleSort();
+}
+
+void testCase8(){
+    CTask task1("Learn machine learning", 2.0);
+    CTask task2("Review C++", 3.0);
+    CTask task3("Learn image processing", 1.3);
+    CTask task4("Review algorithms", 1.1);
+    CTask task5("Review math", 2.1);
+    CTask task6("Reading inside c++ model", 0.3);
+
+    CTask tasks[]{task1,task2,task3,task4,task5,task6};
+    int size = sizeof(tasks)/sizeof(CTask);
+    CSort<CTask> testSort(tasks,size);
+    testSort.mSelectSort();
 }

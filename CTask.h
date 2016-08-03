@@ -20,13 +20,22 @@ public:
         return this->m_getPriority() > a.m_getPriority() ? true: false;
     }
 
+    bool operator< (const CTask& a){
+        return this->m_getPriority() < a.m_getPriority() ? true: false;
+    }
+
     friend ostream& operator<< (ostream& outStream, const CTask& task){
-        outStream << task.m_description;
+        //outStream << task.m_description; // ok: friend
+        outStream << task.m_getDescription();
         return outStream;
     }
 
     float m_getPriority() const{
         return m_priority;
+    }
+
+    string m_getDescription() const{
+        return m_description;
     }
 private:
     string m_description{"NULL TASK"};

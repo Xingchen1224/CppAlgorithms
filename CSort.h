@@ -73,7 +73,22 @@ public:
         }
     }
 
-//    void mSelectSort();
+    void mSelectSort(){
+        int round = 0;
+        for (int i = 0; i < m_length; ++i) {
+            int minIndex = i;
+            for (int j = i; j < m_length; ++j) {
+                round++;
+                if(m_data[j]< m_data[minIndex]){
+                    minIndex = j;
+                }
+                this->mPrintSequence("Select Sort",round);
+            }
+            if(minIndex != i){
+                mSwap(m_data[i],m_data[minIndex]);
+            }
+        }
+    }
 //    void mInsertSort();
 //    void mMergeSort();
 //    void mQuickSort();
