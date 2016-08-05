@@ -4,15 +4,17 @@
 
 using namespace std;
 
-void testCase1(); //Bubble Sort <int>
-void testCase2(); //Bubble Sort <float>
-void testCase3(); //Bubble Sort <double>
-void testCase4(); //Bubble Sort <char>
-void testCase5(); //Bubble Sort <CTask>
-void testCase6(); //Select Sort <int>
-void testCase7(); //Select Sort <float> & Bubble Sort <float>
-void testCase8(); //Select Sort <CTask>
-void testCase9(); //Insert Sort <int>
+void testCase1();   //Bubble Sort <int>
+void testCase2();   //Bubble Sort <float>
+void testCase3();   //Bubble Sort <double>
+void testCase4();   //Bubble Sort <char>
+void testCase5();   //Bubble Sort <CTask>
+void testCase6();   //Select Sort <int>
+void testCase7();   //Select Sort <float> & Bubble Sort <float>
+void testCase8();   //Select Sort <CTask>
+void testCase9();   //Insert Sort <int> & Select Sort <int> & Bubble Sort <int>
+void testCase10();  //Insert Sort <CTask>
+void testCase11();  //Quick Sort <int>
 
 int main() {
 //    testCase1();
@@ -23,7 +25,9 @@ int main() {
 //    testCase6();
 //    testCase7();
 //    testCase8();
-    testCase9();
+//    testCase9();
+//    testCase10();
+    testCase11();
     return 0;
 }
 
@@ -123,4 +127,25 @@ void testCase9(){
     CSort<int>* testSort3 = new CSort<int>(pData3, size3);
     testSort3->mBubbleSort();
     delete testSort3;
+}
+
+void testCase10(){
+    CTask task1("Learn machine learning", 2.0);
+    CTask task2("Review C++", 3.0);
+    CTask task3("Learn image processing", 1.3);
+    CTask task4("Review algorithms", 1.1);
+    CTask task5("Review math", 2.1);
+    CTask task6("Reading inside c++ model", 0.3);
+
+    CTask tasks[]{task1,task2,task3,task4,task5,task6};
+    int size = sizeof(tasks)/sizeof(CTask);
+    CSort<CTask> testSort(tasks,size);
+    testSort.mInsertSort();
+}
+
+void testCase11(){
+    int pData[] = {31, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48};
+    int size = sizeof(pData)/sizeof(int);
+    CSort<int> testSort(pData, size);
+    testSort.mQuickSort();
 }

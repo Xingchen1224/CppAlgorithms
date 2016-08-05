@@ -3,5 +3,5 @@ project(CppAlgorithms)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp CSort.h CSequence.h CTask.h)
+set(SOURCE_FILES main.cpp CSort.h CSequence.h CTask.h CList.cpp CList.h)
 add_executable(CppAlgorithms ${SOURCE_FILES})

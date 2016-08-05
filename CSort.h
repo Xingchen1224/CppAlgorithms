@@ -61,21 +61,21 @@ public:
 
     //sort algorithms
     void mBubbleSort(){
-        int round = 0;
+
         for (int i = 0; i < m_length-1; ++i) {
             for (int j = 0; j < m_length-1-i; ++j) {
 
                 if(m_data[j]> m_data[j+1]) {
-                    round++;
-                    this->mSwap(m_data[j],m_data[j+1]);
-                    this->mPrintSequence("Bubble Sort",round);
+                    m_round++;
+                    this->mrSwap(m_data[j],m_data[j+1]);
+                    this->mPrintSequence("Bubble Sort",m_round);
                 }
             }
         }
     }
 
     void mSelectSort(){
-        int round = 0;
+
         for (int i = 0; i < m_length; ++i) {
             int minIndex = i;
             for (int j = i; j < m_length; ++j) {
@@ -85,15 +85,15 @@ public:
                 }
             }
             if(minIndex != i){
-                round++;
-                mSwap(m_data[i],m_data[minIndex]);
-                this->mPrintSequence("Select Sort",round);
+                m_round++;
+                mrSwap(m_data[i],m_data[minIndex]);
+                this->mPrintSequence("Select Sort",m_round);
             }
         }
     }
 
     void mInsertSort(){
-        int round = 0;
+
         T current = m_data[0];
         for (int i = 0; i < m_length-1; ++i) {
             current = m_data[i+1];
@@ -102,27 +102,85 @@ public:
             {
                 m_data[i-step+1] = m_data[i-step];
                 step++;
-                round++;
-                this->mPrintSequence("Insert Sort",round);
+                m_round++;
+                this->mPrintSequence("Insert Sort",m_round);
             }
             m_data[i-step+1] = current;
         }
     }
 //    void mMergeSort();
-//    void mQuickSort();
+    void mQuickSort(){
+        this->mQuickSort1(m_data, m_data+m_length-1); // pEnd = pBegin+len-1 !!!
+    }
 //    void mRQuickSort();
 //    void mCountSort();
 //    void mRadixSort();
 
 
 private:
-    T* m_data{nullptr};
-    int  m_length{0};
+    T*      m_data{nullptr};
+    int     m_length{0};
+    int     m_round{1};
 
-    void mSwap(T& a, T& b){
+//    void mpSwap(T* a, T* b){
+//        T temp = *a;
+//        *a = *b;
+//        *b = temp;
+//    }
+
+    void mrSwap(T& a, T& b){
         T temp = a;
         a = b;
         b = temp;
+    }
+
+    //set 1st element as pivot
+    void mQuickSort1(T* pBegin,T* pEnd){
+
+        cout << "len: " << pEnd - pBegin<<endl;
+        if(pBegin >= pEnd){
+            return;
+        }
+
+        //divide
+        T* pivot = pBegin;
+        T* leftIdx = pBegin+1;
+        T* rightIdx = pEnd;
+
+        bool leftLock = false;
+        bool rightLock = false;
+
+        while (leftIdx < rightIdx){
+
+            if(*leftIdx > *pivot){
+                leftLock = true;
+            }
+            if(*rightIdx < *pivot){
+                rightLock = true;
+            }
+            if(leftLock == true && rightLock==true){
+                mrSwap(*leftIdx,*rightIdx);
+                leftLock = false;
+                rightLock = false;
+                this->mPrintSequence("Quick Sort",m_round);
+                m_round++;
+            }
+            if(leftLock == false){
+                leftIdx++;
+            }
+            if(rightLock == false){
+                rightIdx--;
+            }
+
+        }
+
+        mrSwap(*pivot,*leftIdx);
+        this->mPrintSequence("Quick Sort",m_round);
+        m_round++;
+
+        //conquer
+        mQuickSort1(pBegin,leftIdx-1);
+        mQuickSort1(leftIdx+1,pEnd);
     }
 };
 
