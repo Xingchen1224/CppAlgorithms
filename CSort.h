@@ -111,6 +111,7 @@ public:
 //    void mMergeSort();
     void mQuickSort(){
         this->mQuickSort1(m_data, m_data+m_length-1); // pEnd = pBegin+len-1 !!!
+//        this->mQuickSort1(0, m_length-1); // pEnd = pBegin+len-1 !!!
     }
 //    void mRQuickSort();
 //    void mCountSort();
@@ -129,58 +130,95 @@ private:
 //    }
 
     void mrSwap(T& a, T& b){
-        T temp = a;
-        a = b;
-        b = temp;
+            T temp = a;
+            a = b;
+            b = temp;
     }
 
-    //set 1st element as pivot
-    void mQuickSort1(T* pBegin,T* pEnd){
 
-        cout << "len: " << pEnd - pBegin<<endl;
-        if(pBegin >= pEnd){
+
+    //set last element as pivot
+    void mQuickSort1(T* p, T* r){
+        if(p== nullptr || r== nullptr){
+            cout << "nullptr error." <<endl;
+            return;
+        }
+        if(p == r){
+            cout << "Only one element." << endl;
             return;
         }
 
-        //divide
-        T* pivot = pBegin;
-        T* leftIdx = pBegin+1;
-        T* rightIdx = pEnd;
+        T* pAnchor = mPartition(p,r);
 
-        bool leftLock = false;
-        bool rightLock = false;
-
-        while (leftIdx < rightIdx){
-
-            if(*leftIdx > *pivot){
-                leftLock = true;
-            }
-            if(*rightIdx < *pivot){
-                rightLock = true;
-            }
-            if(leftLock == true && rightLock==true){
-                mrSwap(*leftIdx,*rightIdx);
-                leftLock = false;
-                rightLock = false;
-                this->mPrintSequence("Quick Sort",m_round);
-                m_round++;
-            }
-            if(leftLock == false){
-                leftIdx++;
-            }
-            if(rightLock == false){
-                rightIdx--;
-            }
-
+        if(p == pAnchor-1 || p == pAnchor){
+            return;
+        }else{
+            mQuickSort1(p, pAnchor-1);
         }
 
-        mrSwap(*pivot,*leftIdx);
+        if(r == pAnchor+1 || r==pAnchor){
+            return;
+        } else{
+            mQuickSort1(pAnchor+1,r);
+        }
+
+    }
+
+    //return the index of anchor
+    T* mPartition(T* p, T* r){
+        T pivot = *r;
+
+        T* i = p;
+        for (T* j = p; j<= r-1; j++) {
+            if(*j < pivot){
+                mrSwap(*i, *j);
+                i++;
+            }
+        }
+
+        mrSwap(*i,*r);
+
         this->mPrintSequence("Quick Sort",m_round);
         m_round++;
 
-        //conquer
-        mQuickSort1(pBegin,leftIdx-1);
-        mQuickSort1(leftIdx+1,pEnd);
+        return i;
+    }
+
+    //set last element as pivot
+    void mQuickSort1(int p, int r){
+        int anchor = mPartition(p, r);
+
+        if(p == anchor-1 || p == anchor){ // only one element
+            return;
+        }else{
+            mQuickSort1(p,anchor-1);
+        }
+
+        if(r == anchor+1 || r == anchor){ // only one element
+            return;
+        }else{
+            mQuickSort1(anchor+1,r);
+        }
+    }
+
+    //return the index of anchor
+    int mPartition(int p, int r){
+
+        T pivot = m_data[r];
+        int i = p - 1;
+
+        for (int j = p; j <= r-1; ++j) {
+            if (m_data[j] < pivot){
+                i++;
+                mrSwap(m_data[j],m_data[i]);
+            }
+        }
+
+        mrSwap(m_data[i+1], m_data[r]);
+        this->mPrintSequence("Quick Sort",m_round);
+        m_round++;
+
+        return i+1;
     }
 };
 

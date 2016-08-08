@@ -24,6 +24,8 @@ public:
         return this->m_getPriority() < a.m_getPriority() ? true: false;
     }
 
+
+
     friend ostream& operator<< (ostream& outStream, const CTask& task){
         //outStream << task.m_description; // ok: friend
         outStream << task.m_getDescription();

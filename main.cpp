@@ -144,7 +144,9 @@ void testCase10(){
 }
 
 void testCase11(){
-    int pData[] = {31, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48};
+//    int pData[] = {31, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48};
+    int pData[] = {56,78,37,11,53,13,756,43,9,67,4,32,12,14,75,99,15,33,38,74,35,246,74,373,743,212,42,56,41,98};
+//    int pData[] = {2,8,7,1,3,5,6,4};
     int size = sizeof(pData)/sizeof(int);
     CSort<int> testSort(pData, size);
     testSort.mQuickSort();
