@@ -110,8 +110,8 @@ public:
     }
 //    void mMergeSort();
     void mQuickSort(){
-        this->mQuickSort1(m_data, m_data+m_length-1); // pEnd = pBegin+len-1 !!!
-//        this->mQuickSort1(0, m_length-1); // pEnd = pBegin+len-1 !!!
+//        this->mQuickSort1(m_data, m_data+m_length-1); // pEnd = pBegin+len-1 !!!
+        this->mQuickSort1(0, m_length-1); // pEnd = pBegin+len-1 !!!
     }
 //    void mRQuickSort();
 //    void mCountSort();
@@ -170,7 +170,7 @@ private:
 
         T* i = p;
         for (T* j = p; j<= r-1; j++) {
-            if(*j < pivot){
+            if(*j <= pivot){ //should be <= or it will be 74 75 74
                 mrSwap(*i, *j);
                 i++;
             }
@@ -208,7 +208,7 @@ private:
         int i = p - 1;
 
         for (int j = p; j <= r-1; ++j) {
-            if (m_data[j] < pivot){
+            if (m_data[j] <= pivot){ //should be <= or 74 75 74
                 i++;
                 mrSwap(m_data[j],m_data[i]);
             }
