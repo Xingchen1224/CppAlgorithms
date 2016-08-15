@@ -109,7 +109,7 @@ public:
         }
     }
     void mMergeSort(){
-        mMergeSort(0,m_length);
+        mMergeSort(0,m_length-1);
     }
 
     void mQuickSort(){
@@ -245,8 +245,8 @@ private:
 
             if((p+r)%2 == 0){ //e.g. len = 9 (p=0, r=8) => q = 4
                 q=(p+r)/2;
-            }else{ //e.g. len = 8 (p=0, r=7) => q = 4
-                q=(p+r+1)/2;
+            }else{ //e.g. len = 8 (p=0, r=7) => q = 3
+                q=(p+r-1)/2;
             }
 
             this->mMergeSort(p, q);
@@ -261,28 +261,39 @@ private:
 
         // L [1 .. n+1] = m_data[p .. q+1] = m_data[p .. p+n1-1]
         T* L = new T[n1];
+        cout<< "L[i]: ";
         for (int i = 0; i < n1; ++i) {
-            L[i] = m_data[p+i-1];
+            L[i] = m_data[p+i];
+            cout<< " "<<L[i]<<" ";
         }
+        cout<<endl;
 
         // R: m_data[1 .. n+2] = m_data[q .. r] = m_data[q .. q+n2]
         T* R = new T[n2];
+        cout<< "R[j]: ";
         for (int j = 0; j < n2; ++j) {
-            R[j] = m_data[q+j];
+            R[j] = m_data[q+j+1];
+            cout<< " "<<R[j]<<" ";
         }
+        cout<<endl;
 
         int i = 0;
         int j = 0;
 
-        for (int k = p; k < r; ++k) {
+        for (int k = p; k <= r; ++k) {
             if(L[i] <= R[j]){
                 m_data[k] = L[i];
+                //cout<< "L[i]  "<<L[i]<<endl;
                 i++;
             } else{
                 m_data[k] = R[j];
+                //cout<< "R[j]  "<<R[j]<<endl;
                 j++;
             }
         }
+        m_round++;
+        this->mPrintSequence("Merge Sort",m_round,15,3);
+
         delete []L;
         delete []R;
     }
