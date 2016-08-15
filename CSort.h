@@ -108,10 +108,13 @@ public:
             m_data[i-step+1] = current;
         }
     }
-//    void mMergeSort();
+    void mMergeSort(){
+        mMergeSort(0,m_length);
+    }
+
     void mQuickSort(){
-//        this->mQuickSort1(m_data, m_data+m_length-1); // pEnd = pBegin+len-1 !!!
-        this->mQuickSort1(0, m_length-1); // pEnd = pBegin+len-1 !!!
+//        this->mQuickSort(m_data, m_data+m_length-1); // pEnd = pBegin+len-1 !!!
+        this->mQuickSort(0, m_length - 1); // pEnd = pBegin+len-1 !!!
     }
 //    void mRQuickSort();
 //    void mCountSort();
@@ -138,7 +141,7 @@ private:
 
 
     //set last element as pivot
-    void mQuickSort1(T* p, T* r){
+    void mQuickSort(T *p, T *r){
         if(p== nullptr || r== nullptr){
             cout << "nullptr error." <<endl;
             return;
@@ -151,18 +154,18 @@ private:
         T* pAnchor = mPartition(p,r);
 
         if(p == pAnchor){//left empty
-            mQuickSort1(pAnchor+1, r);
+            mQuickSort(pAnchor + 1, r);
             return;
         }
 
         if(r==pAnchor){//right empty
-            mQuickSort1(p,pAnchor-1);
+            mQuickSort(p, pAnchor - 1);
             return;
         }
 
         //both sides are not empty
-        mQuickSort1(p,pAnchor-1);
-        mQuickSort1(pAnchor+1, r);
+        mQuickSort(p, pAnchor - 1);
+        mQuickSort(pAnchor + 1, r);
 
     }
 
@@ -189,7 +192,7 @@ private:
     }
 
     //set last element as pivot
-    void mQuickSort1(int p, int r){
+    void mQuickSort(int p, int r){
         if(p == r){
             cout << "Only one element:  " << m_data[p] << endl;
             return;
@@ -199,18 +202,18 @@ private:
         int anchor = mPartition(p, r);
 
         if(p == anchor){ //left empty
-            mQuickSort1(anchor+1,r);
+            mQuickSort(anchor + 1, r);
             return;
         }
         if(r == anchor){ //right empty
-            mQuickSort1(p,anchor-1);
+            mQuickSort(p, anchor - 1);
 
             return;
         }
 
         //both sides are not empty
-        mQuickSort1(p,anchor-1);
-        mQuickSort1(anchor+1,r);
+        mQuickSort(p, anchor - 1);
+        mQuickSort(anchor + 1, r);
     }
 
     //return the index of anchor
@@ -231,6 +234,57 @@ private:
         m_round++;
 
         return i+1;
+    }
+
+    void mMergeSort(int p, int r){
+        if(p >= r){
+            return;
+
+        } else{
+            int q = -1;
+
+            if((p+r)%2 == 0){ //e.g. len = 9 (p=0, r=8) => q = 4
+                q=(p+r)/2;
+            }else{ //e.g. len = 8 (p=0, r=7) => q = 4
+                q=(p+r+1)/2;
+            }
+
+            this->mMergeSort(p, q);
+            this->mMergeSort(q+1, r);
+            this->mMerge(p, q, r);
+        }
+    }
+
+    void mMerge(int p, int q, int r){
+        int n1 = q - p + 1;
+        int n2 = r - q;
+
+        // L [1 .. n+1] = m_data[p .. q+1] = m_data[p .. p+n1-1]
+        T* L = new T[n1];
+        for (int i = 0; i < n1; ++i) {
+            L[i] = m_data[p+i-1];
+        }
+
+        // R: m_data[1 .. n+2] = m_data[q .. r] = m_data[q .. q+n2]
+        T* R = new T[n2];
+        for (int j = 0; j < n2; ++j) {
+            R[j] = m_data[q+j];
+        }
+
+        int i = 0;
+        int j = 0;
+
+        for (int k = p; k < r; ++k) {
+            if(L[i] <= R[j]){
+                m_data[k] = L[i];
+                i++;
+            } else{
+                m_data[k] = R[j];
+                j++;
+            }
+        }
+        delete []L;
+        delete []R;
     }
 };
 
