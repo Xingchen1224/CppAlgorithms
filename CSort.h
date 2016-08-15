@@ -260,22 +260,24 @@ private:
         int n2 = r - q;
 
         // L [1 .. n+1] = m_data[p .. q+1] = m_data[p .. p+n1-1]
-        T* L = new T[n1];
+        T* L = new T[n1+1];
         cout<< "L[i]: ";
         for (int i = 0; i < n1; ++i) {
             L[i] = m_data[p+i];
             cout<< " "<<L[i]<<" ";
         }
         cout<<endl;
+        L[n1] = 100000; //very important: to set it as infinite or the last element will be 0 or bad access memory
 
         // R: m_data[1 .. n+2] = m_data[q .. r] = m_data[q .. q+n2]
-        T* R = new T[n2];
+        T* R = new T[n2+1];
         cout<< "R[j]: ";
         for (int j = 0; j < n2; ++j) {
             R[j] = m_data[q+j+1];
             cout<< " "<<R[j]<<" ";
         }
         cout<<endl;
+        R[n2] = 100000; //very important: to set it as infinite or the last element will be 0 or bad access memory
 
         int i = 0;
         int j = 0;
@@ -284,11 +286,11 @@ private:
             if(L[i] <= R[j]){
                 m_data[k] = L[i];
                 //cout<< "L[i]  "<<L[i]<<endl;
-                i++;
+                i++; //very important: to set it as infinite or the last element will be 0 or bad access memory
             } else{
                 m_data[k] = R[j];
                 //cout<< "R[j]  "<<R[j]<<endl;
-                j++;
+                j++; //very important: to set it as infinite or the last element will be 0 or bad access memory
             }
         }
         m_round++;
